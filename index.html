@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zyad Portfolio</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            scroll-behavior: smooth;
+            font-family: "Poppins", sans-serif;
+        }
+
+        :root {
+            --bg-color: #080808;
+            --second-bg-color: #101010;
+            --text-color: white;
+            --main-color: #ea580c;
+            --card-bg: rgba(30, 30, 30, 0.5);
+            --nav-bg: rgba(0, 0, 0, 0.3);
+            
+            /* Light mode variables */
+            --light-bg-color: #f8f9fa;
+            --light-second-bg-color: #ffffff;
+            --light-text-color: #212529;
+            --light-main-color: #ff6b00;
+            --light-card-bg: rgba(255, 255, 255, 0.8);
+            --light-nav-bg: rgba(255, 255, 255, 0.3);
+        }
+
+        html {
+            font-size: 60%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        body.light-mode {
+            --bg-color: var(--light-bg-color);
+            --second-bg-color: var(--light-second-bg-color);
+            --text-color: var(--light-text-color);
+            --main-color: var(--light-main-color);
+            --card-bg: var(--light-card-bg);
+            --nav-bg: var(--light-nav-bg);
+        }
+
+        .header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 2rem 10%;
+            background-color: #000000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: background 0.5s ease;
+        }
+
+        #menu-icon, #close-icon {
+            font-size: 3.5rem;
+            color: var(--main-color);
+            cursor: pointer;
+            display: none;
+            z-index: 1001;
+        }
+
+        .logo {
+            font-size: 3rem;
+            color: var(--text-color);
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+            z-index: 1001;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        span {
+            color: var(--main-color);
+        }
+
+        .navbar {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .navbar a {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: 0.3s ease;
+            position: relative;
+        }
+
+        .navbar a:hover {
+            color: var(--main-color);
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--main-color);
+            transition: width 0.3s ease;
+        }
+
+        .navbar a:hover::after {
+            width: 100%;
+        }
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .gradient-btn {
+            background: linear-gradient(270deg, #DF8908, #ff1d15);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(223, 137, 8, 0.3);
+        }
+
+        .gradient-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(223, 137, 8, 0.5);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 2.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            padding-top: 8rem;
+            background: var(--bg-color);
+        }
+
+        .hero-img img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease;
+            margin-bottom: 40px;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero-content h1 {
+            font-size: 5.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-content h3 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--main-color);
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.8rem;
+            margin-bottom: 3rem;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .hero-img {
+            position: absolute;
+            bottom: 0;
+            right: 10%;
+            width: 40%;
+            max-width: 500px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--second-bg-color);
+            border-radius: 50%;
+            color: var(--text-color);
+            font-size: 2.5rem;
+            transition: 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--main-color);
+            transform: translateY(-5px);
+        }
+
+        /* Sections */
+        section {
+            padding: 10rem 10% 5rem;
+        }
+
+        .section-title {
+            font-size: 4.5rem;
+            text-align: center;
+            margin-bottom: 7rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: var(--main-color);
+            border-radius: 5px;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--second-bg-color);
+        }
+
+        .about-content {
+            display: flex;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-img {
+            flex: 1;
+            max-width: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease;
+        }
+
+        .about-img img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .about-text p {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        /* Updated Info Section - More Compact */
+        .info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem; /* Reduced from 2rem */
+            margin-bottom: 3rem;
+        }
+
+        .info div {
+            flex: 1 1 200px;
+            padding: 0.8rem; /* Added padding for better spacing */
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .info div:hover {
+            background: rgba(234, 88, 12, 0.1);
+        }
+
+        .info h4 {
+            font-size: 1.6rem; /* Slightly smaller */
+            margin-bottom: 0.3rem; /* Reduced margin */
+            color: var(--main-color);
+        }
+
+        .info span {
+            font-size: 1.5rem; /* Slightly smaller */
+            opacity: 0.9;
+        }
+
+        /* Services Section */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: rgba(234, 88, 12, 0.1);
+        }
+
+        .service-card i {
+            font-size: 5rem;
+            color: var(--main-color);
+            margin-bottom: 2rem;
+        }
+
+        .service-card h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card p {
+            font-size: 1.6rem;
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        /* Projects Section */
+        .projects {
+            background: var(--second-bg-color);
+        }
+
+        .projects-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .filter-btn {
+            padding: 1rem 2rem;
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--main-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(234, 88, 12, 0.3);
+        }
+
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-img {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            padding: 2.5rem;
+        }
+
+        .project-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-content p {
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .project-links a {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--main-color);
+            color: white;
+            border-radius: 5px;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-links a:nth-child(2) {
+            background: transparent;
+            border: 1px solid var(--main-color);
+            color: var(--main-color);
+        }
+
+        .project-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(234, 88, 12, 0.3);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            gap: 5rem;
+        }
+
+        .contact-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem; /* Reduced from 3rem */
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem; /* Reduced from 2rem */
+            padding: 1rem;
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: var(--card-bg);
+        }
+
+        .contact-item i {
+            font-size: 2.5rem; /* Slightly smaller */
+            color: var(--main-color);
+            width: 60px; /* Slightly smaller */
+            height: 60px; /* Slightly smaller */
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover i {
+            background: var(--main-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .contact-text h3 {
+            font-size: 2rem; /* Slightly smaller */
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-text p {
+            font-size: 1.5rem; /* Slightly smaller */
+            opacity: 0.8;
+        }
+
+        .contact-form {
+            flex: 1;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.5rem;
+            background: var(--bg-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--text-color);
+            font-size: 1.6rem;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .contact-form .gradient-btn {
+            width: 100%;
+            font-size: 1.8rem;
+            padding: 1.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--second-bg-color);
+            padding: 3rem 10%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-links a {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            transition: 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--main-color);
+        }
+
+        .footer-text {
+            font-size: 1.6rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-img {
+                display: none;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                text-align: center;
+                margin: 0 auto;
+            }
+            
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .header {
+                padding: 2rem 5%;
+            }
+            
+            section {
+                padding: 8rem 5% 3rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #menu-icon {
+                display: block;
+            }
+            
+            .navbar {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100vh;
+                background: var(--second-bg-color);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 3rem;
+                transition: left 0.5s ease;
+                z-index: 999;
+            }
+            
+            .navbar.active {
+                left: 0;
+            }
+            
+            .header-buttons {
+                margin-left: 10px;
+            }
+            
+            .hero-content h1 {
+                font-size: 4.5rem;
+            }
+            
+            .hero-content h3 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 3.5rem;
+            }
+            
+            .theme-toggle {
+                margin-left: 0;
+            }
+            
+            /* More compact info on mobile */
+            .info {
+                gap: 0.8rem;
+            }
+            
+            .info div {
+                flex: 1 1 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 3.8rem;
+            }
+            
+            .section-title {
+                font-size: 3rem;
+            }
+            
+            .info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-filter {
+                gap: 1rem;
+            }
+            
+            .filter-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#home" class="logo">
+            Zyad <span>Portfolio</span>
+        </a>
+        
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        
+        <div class="header-buttons">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
+                <i class="bx bx-moon"></i>
+            </button>
+        </div>
+        
+        <i class="bx bx-menu" id="menu-icon"></i>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h3>Hello, I'm</h3>
+            <h1>Zyad <span>Magdy</span></h1>
+            <h3>And I'm a <span>Full Stack Developer</span></h3>
+            <p>I create stunning websites and applications that deliver exceptional user experiences. With expertise in both front-end and back-end development, I bring ideas to life with clean, efficient code.</p>
+            
+            <div class="social-icons">
+                <a href="https://www.facebook.com/profile.php?id=61578946492932" target="_blank" aria-label="Facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/zyad-programmer-5b1774366/" target="_blank" aria-label="LinkedIn"><i class="bx bxl-linkedin"></i></a>
+                <a href="https://github.com/ZyadProgrammer" target="_blank" aria-label="GitHub"><i class="bx bxl-github"></i></a>
+            </div>
+            
+            <button class="gradient-btn" onclick="location.href='#projects'">My Projects</button>
+        </div>
+        
+        <div class="hero-img">
+            <img src="Zyad.jpg" alt="Zyad Magdy">
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">About <span>Me</span></h2>
+        
+        <div class="about-content">
+            <div class="about-img">
+                <img src="Zyad.jpg" alt="Zyad Magdy">
+            </div>
+            
+            <div class="about-text">
+                <h3>Full Stack Developer</h3>
+                <p>I'm a passionate young developer with 3+ years of experience creating web applications. My journey in tech started when I was 10 years old, and I've been hooked ever since. I've mastered HTML, CSS, and JavaScript, and specialize in building responsive, user-friendly websites that solve real-world problems.</p>
+                <div class="info">
+                    <div>
+                        <h4>Name:</h4>
+                        <span>Zyad Magdy</span>
+                    </div>
+                    <div>
+                        <h4>Email:</h4>
+                        <span>zyadmgdy25@gmail.com</span>
+                    </div>
+                    <div>
+                        <h4>Location:</h4>
+                        <span>Hurgada, Egypt</span>
+                    </div>
+                    <div>
+                        <h4>Freelance:</h4>
+                        <span>Available</span>
+                    </div>
+                </div>
+                
+                <p>When I'm not coding, you can find me hiking in the mountains, reading sci-fi novels, or experimenting with new recipes in the kitchen. I believe in continuous learning and staying updated with the latest industry trends.</p>
+                
+                <a href="CV.html" target="_blank" class="gradient-btn">Go To CV ATS</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2 class="section-title">My <span>Services</span></h2>
+        
+        <div class="services-container">
+            <div class="service-card">
+                <i class="bx bx-code-alt"></i>
+                <h3>Web Development</h3>
+                <p>I build responsive websites and web applications using modern technologies like React, Vue, Node.js, and more. From simple landing pages to complex web apps.</p>
+            </div>
+            
+            <div class="service-card">
+                <i class="bx bx-mobile-alt"></i>
+                <h3>Mobile Development</h3>
+                <p>Creating cross-platform mobile applications with React Native and Flutter. I focus on performance and native-like user experiences.</p>
+            </div>
+            
+            <div class="service-card">
+                <i class="bx bx-palette"></i>
+                <h3>UI/UX Design</h3>
+                <p>Designing intuitive and beautiful user interfaces that enhance user engagement and satisfaction. I use Figma and Adobe XD for prototyping.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+<section class="projects" id="projects">
+    <h2 class="section-title">My <span>Projects</span></h2>
+    
+    <!-- Project Filter Buttons -->
+    <div class="projects-filter">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="shoes">Shoes</button>
+        <button class="filter-btn" data-filter="dragon">Dragon</button>
+        <button class="filter-btn" data-filter="playstation">PlayStation</button>
+        <button class="filter-btn" data-filter="login">Login Form</button>
+        <button class="filter-btn" data-filter="other">Other</button>
+    </div>
+    
+    <div class="projects-container">
+        <div class="project-card" data-category="shoes">
+            <div class="project-img">
+                <img src="OldTime.png" alt="OldTime Brands website">
+            </div>
+            <div class="project-content">
+                <h3>OldTime Brands</h3>
+                <p>I Make this website with shopify</p>
+                <div class="project-links">
+                    <a href="https://oldtimebrands.com/" target="_blank">Live Demo</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="project-card" data-category="shoes">
+            <div class="project-img">
+                <img src="Adidas.png" alt="Adidas website">
+            </div>
+            <div class="project-content">
+                <h3>Adidas website</h3>
+                <div class="project-links">
+                    <a href="https://zyad-magdy.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/144Z80hDl2FXkQhdN0ndTYbbbnri2JfUk?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="other">
+            <div class="project-img">
+                <img src="5amsat Clone.png" alt="5amsat Clone">
+            </div>
+            <div class="project-content">
+                <h3>5amsat Clone</h3>
+                <div class="project-links">
+                    <a href="https://5amsat-clone-one.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/1feOo8qYgZgO8d_l9Tu395uU8V1gkYpjp?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="other">
+            <div class="project-img">
+                <img src="Cal.png" alt="Calculator">
+            </div>
+            <div class="project-content">
+                <h3>Calculator</h3>
+                <div class="project-links">
+                    <a href="https://calculator-ashy-theta-31.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/17ty_SmQ_hScLv-Um0mor-P1o-GDX_HpC?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="other">
+            <div class="project-img">
+                <img src="Ca;ender.png" alt="Calendar">
+            </div>
+            <div class="project-content">
+                <h3>Calendar</h3>
+                <div class="project-links">
+                    <a href="https://calender-seven-gamma.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/1F0Iw8UTyuY-rcdAfXW11jCurck9G8T6R?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="dragon">
+            <div class="project-img">
+                <img src="Dragon.png" alt="Dragon Project">
+            </div>
+            <div class="project-content">
+                <h3>Dragon</h3>
+                <p>An interactive dragon-themed website with animations.</p>
+                <div class="project-links">
+                    <a href="https://dragon-six-pearl.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/1_1Xg3AJYtt67WIpB4gApgtXf4bLeQB9v?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="project-card" data-category="other">
+            <div class="project-img">
+                <img src="Tours..png" alt="Tours Project">
+            </div>
+            <div class="project-content">
+                <h3>Tours.</h3>
+                <div class="project-links">
+                    <a href="https://tours-one-pi.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/1i0kU4seYyIn2hQzU2PN428oyCosG3yVo?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="dragon">
+            <div class="project-img">
+                <img src="Dragon 2.png" alt="Dragon 2 Project">
+            </div>
+            <div class="project-content">
+                <h3>Dragon 2</h3>
+                <div class="project-links">
+                    <a href="https://dragon-2.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/14Wr2dUjgkbjLU_MSvp0FSWqYev_-k3td?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="dragon">
+            <div class="project-img">
+                <img src="PlayStation controller.png" alt="PlayStation controller Project">
+            </div>
+            <div class="project-content">
+                <h3>PlayStation controller</h3>
+                <div class="project-links">
+                    <a href="https://controls-five.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/1AHoIxcXDEiiDniaM_jjDtRWgD9awzE1n?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="login">
+            <div class="project-img">
+                <img src="Login Form.png" alt="Login Form">
+            </div>
+            <div class="project-content">
+                <h3>Login Form</h3>
+                <div class="project-links">
+                    <a href="https://login-form-ni3k.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/1Y0yWoitgtx3vvft4f2qlUrybk9aFgOUI?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="shoes">
+            <div class="project-img">
+                <img src="Nike.png" alt="Nike Project">
+            </div>
+            <div class="project-content">
+                <h3>Nike</h3>
+                <div class="project-links">
+                    <a href="https://shoes-five-kappa.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/1i0kU4seYyIn2hQzU2PN428oyCosG3yVo?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="shoes">
+            <div class="project-img">
+                <img src="Shoes 2.png" alt="Nike 2 Project">
+            </div>
+            <div class="project-content">
+                <h3>Nike 2</h3>
+                <div class="project-links">
+                    <a href="https://shoes-2-theta.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/1BZkjqct-TbMaraTSDHNluL3sI4pI2my7?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="other">
+            <div class="project-img">
+                <img src="Zyad Pro.png" alt="Zyad Pro Project">
+            </div>
+            <div class="project-content">
+                <h3>Zyad Pro</h3>
+                <div class="project-links">
+                    <a href="https://zyad-pro.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/1HyjB4oKvxhBguM0ughAj3B3uONbsGQUZ?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="shoes">
+            <div class="project-img">
+                <img src="Nike 3.png" alt="Nike 3 Project">
+            </div>
+            <div class="project-content">
+                <h3>Nike 3</h3>
+                <div class="project-links">
+                    <a href="https://zyad-magdy-v7jg.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/1TQpPAasSayvRaC2-6374bYrhmxWkb_eF?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="other">
+            <div class="project-img">
+                <img src="YouTube.png" alt="YouTube">
+            </div>
+            <div class="project-content">
+                <h3>YouTube</h3>
+                <div class="project-links">
+                    <a href="https://you-tube-nine-psi.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/1F0Iw8UTyuY-rcdAfXW11jCurck9G8T6R?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="other">
+            <div class="project-img">
+                <img src="Login.png" alt="Login">
+            </div>
+            <div class="project-content">
+                <h3>Login Form</h3>
+                <div class="project-links">
+                    <a href="https://login-form-2-gray.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/1d5JpPAkGrl2kdd6xIMV8tF5lw0pcD6pa?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="other">
+            <div class="project-img">
+                <img src="Log.png" alt="Calendar">
+            </div>
+            <div class="project-content">
+                <h3>Login Form</h3>
+                <div class="project-links">
+                    <a href="https://login-form-3-tau.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/1g44eBfdeSwyZEqQrT7r9ObGyOXymj-9G?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="other">
+            <div class="project-img">
+                <img src="Lo.png" alt="Calendar">
+            </div>
+            <div class="project-content">
+                <h3>Login Form</h3>
+                <div class="project-links">
+                    <a href="https://login-4-six.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/15W1t6yILGF7QTZwrCw2RSMH6bvncp21z?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="other">
+            <div class="project-img">
+                <img src="Login Form 2.png" alt="Calendar">
+            </div>
+            <div class="project-content">
+                <h3>Login Form 4</h3>
+                <div class="project-links">
+                    <a href="https://login-form-5-rosy.vercel.app/" target="_blank">Live Demo</a>
+                    <a href="https://drive.google.com/drive/folders/1QyC4mF8VxVWRXRDeHrOi50cmEsy6l1Pl?usp=sharing" target="_blank">Source Code</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Contact <span>Me</span></h2>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="bx bx-envelope"></i>
+                    <div class="contact-text">
+                        <h3>Email</h3>
+                        <p>zyadmgdy25@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="bx bx-phone"></i>
+                    <div class="contact-text">
+                        <h3>Phone</h3>
+                        <p>+20 107 079 5098</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="bx bx-map"></i>
+                    <div class="contact-text">
+                        <h3>Location</h3>
+                        <p>Hurgada, Egypt</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" placeholder="Enter your message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="gradient-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">© 2023 Zyad Portfolio. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+
+        // Check for saved theme preference or respect OS preference
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme === 'light' || (!currentTheme && !prefersDarkScheme.matches)) {
+            document.body.classList.add('light-mode');
+            themeIcon.classList.remove('bx-moon');
+            themeIcon.classList.add('bx-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            
+            if (document.body.classList.contains('light-mode')) {
+                themeIcon.classList.remove('bx-moon');
+                themeIcon.classList.add('bx-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.classList.remove('bx-sun');
+                themeIcon.classList.add('bx-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Mobile Navigation
+        const menuIcon = document.getElementById('menu-icon');
+        const navbar = document.querySelector('.navbar');
+
+        menuIcon.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+            // Toggle between menu and close icon
+            if (navbar.classList.contains('active')) {
+                menuIcon.classList.remove('bx-menu');
+                menuIcon.classList.add('bx-x');
+            } else {
+                menuIcon.classList.remove('bx-x');
+                menuIcon.classList.add('bx-menu');
+            }
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('.navbar a').forEach(link => {
+            link.addEventListener('click', () => {
+                navbar.classList.remove('active');
+                menuIcon.classList.remove('bx-x');
+                menuIcon.classList.add('bx-menu');
+            });
+        });
+
+        // Sticky header on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            header.classList.toggle('sticky', window.scrollY > 100);
+        });
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            contactForm.reset();
+        });
+
+        // Project Filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                projectCards.forEach(card => {
+                    if (filterValue === 'all') {
+                        card.style.display = 'block';
+                    } else {
+                        if (card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
